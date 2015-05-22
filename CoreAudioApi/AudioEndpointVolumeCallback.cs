@@ -65,7 +65,16 @@ namespace CoreAudioApi
 
             //Create combined structure and Fire Event in parent class.
             AudioVolumeNotificationData NotificationData = new AudioVolumeNotificationData(data.guidEventContext, data.bMuted, data.fMasterVolume, voldata);
-            _Parent.FireNotification(NotificationData);
+
+            lock (this)
+            {
+                if (_Parent != null)
+                {
+
+                    _Parent.FireNotification(NotificationData);
+                }
+            }
+
             return 0; //S_OK
         }
 
