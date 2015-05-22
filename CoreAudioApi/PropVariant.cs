@@ -20,17 +20,12 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using CoreAudioApi.Interfaces;
-using System;
-using System.Runtime.InteropServices;
-using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
-
 namespace CoreAudioApi
 {
-    [StructLayout(LayoutKind.Explicit)]
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Explicit)]
     public struct PropVariant
     {
-        [FieldOffset(0)]
+        [System.Runtime.InteropServices.FieldOffset(0)]
         private readonly short vt;
 
 //        [FieldOffset(2)]
@@ -45,22 +40,22 @@ namespace CoreAudioApi
 //        [FieldOffset(8)]
 //        private readonly sbyte cVal;
 
-        [FieldOffset(8)]
+        [System.Runtime.InteropServices.FieldOffset(8)]
         private readonly byte bVal;
 
-        [FieldOffset(8)]
+        [System.Runtime.InteropServices.FieldOffset(8)]
         private short iVal;
 
 //        [FieldOffset(8)]
  //       private readonly ushort uiVal;
 
-        [FieldOffset(8)]
+        [System.Runtime.InteropServices.FieldOffset(8)]
         private readonly int lVal;
 
-        [FieldOffset(8)]
+        [System.Runtime.InteropServices.FieldOffset(8)]
         private readonly uint ulVal;
 
-        [FieldOffset(8)]
+        [System.Runtime.InteropServices.FieldOffset(8)]
         private readonly long hVal;
 
 //        [FieldOffset(8)]
@@ -72,8 +67,8 @@ namespace CoreAudioApi
 //        [FieldOffset(8)]
 //        private readonly double dblVal;
 
-        [FieldOffset(8)]
-        private Blob blobVal;
+        [System.Runtime.InteropServices.FieldOffset(8)]
+        private Interfaces.Blob blobVal;
 
 //        [FieldOffset(8)]
 //        private readonly DateTime date;
@@ -87,8 +82,8 @@ namespace CoreAudioApi
 //        [FieldOffset(8)]
 //        private readonly FILETIME filetime;
 
-        [FieldOffset(8)]
-        private readonly IntPtr everything_else;
+        [System.Runtime.InteropServices.FieldOffset(8)]
+        private readonly System.IntPtr everything_else;
 
         //I'm sure there is a more efficient way to do this but this works ..for now..
         internal byte[] GetBlob()
@@ -96,7 +91,7 @@ namespace CoreAudioApi
             byte[] Result = new byte[blobVal.Length];
             for (int i = 0; i < blobVal.Length; i++)
             {
-                Result[i] = Marshal.ReadByte((IntPtr)((long)(blobVal.Data) + i));
+                Result[i] = System.Runtime.InteropServices.Marshal.ReadByte((System.IntPtr)((long)(blobVal.Data) + i));
             }
             return Result;
         }
@@ -105,31 +100,31 @@ namespace CoreAudioApi
         {
             get
             {
-                VarEnum ve = (VarEnum)vt;
+                System.Runtime.InteropServices.VarEnum ve = (System.Runtime.InteropServices.VarEnum)vt;
                 switch (ve)
                 {
-                    case VarEnum.VT_I1:
+                    case System.Runtime.InteropServices.VarEnum.VT_I1:
                         return bVal;
 
-                    case VarEnum.VT_I2:
+                    case System.Runtime.InteropServices.VarEnum.VT_I2:
                         return iVal;
 
-                    case VarEnum.VT_I4:
+                    case System.Runtime.InteropServices.VarEnum.VT_I4:
                         return lVal;
 
-                    case VarEnum.VT_I8:
+                    case System.Runtime.InteropServices.VarEnum.VT_I8:
                         return hVal;
 
-                    case VarEnum.VT_INT:
+                    case System.Runtime.InteropServices.VarEnum.VT_INT:
                         return iVal;
 
-                    case VarEnum.VT_UI4:
+                    case System.Runtime.InteropServices.VarEnum.VT_UI4:
                         return ulVal;
 
-                    case VarEnum.VT_LPWSTR:
-                        return Marshal.PtrToStringUni(everything_else);
+                    case System.Runtime.InteropServices.VarEnum.VT_LPWSTR:
+                        return System.Runtime.InteropServices.Marshal.PtrToStringUni(everything_else);
 
-                    case VarEnum.VT_BLOB:
+                    case System.Runtime.InteropServices.VarEnum.VT_BLOB:
                         return GetBlob();
                 }
                 return "FIXME Type = " + ve;

@@ -273,28 +273,30 @@ namespace AudioManager.Drivers.Seven
             string devName;
             for (int i = 0; i < deviceCollection.Count; i++)
             {
-                MMDevice device = deviceCollection[i];
-                devName = device.FriendlyName;
-                for (int j = 0; j < device.AudioSessionManager.Sessions.Count; j++)
+                using (MMDevice device = deviceCollection[i])
                 {
-                    AudioSessionControl session = device.AudioSessionManager.Sessions[j];
-                    Process p;
-                    try
+                    devName = device.FriendlyName;
+                    for (int j = 0; j < device.AudioSessionManager.Sessions.Count; j++)
                     {
-                        p = Process.GetProcessById((int)session.ProcessID);
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        p = Process.GetProcesses()[0];
-                    }
-                    catch (ArgumentException)
-                    {
-                        p = Process.GetProcesses()[0];
-                    }
+                        AudioSessionControl session = device.AudioSessionManager.Sessions[j];
+                        Process p;
+                        try
+                        {
+                            p = Process.GetProcessById((int)session.ProcessID);
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            p = Process.GetProcesses()[0];
+                        }
+                        catch (ArgumentException)
+                        {
+                            p = Process.GetProcesses()[0];
+                        }
 
-                    if (p.ProcessName == _processName)
-                    {
-                        controls.Add(new AudioSession(session, devName));
+                        if (p.ProcessName == this._processName)
+                        {
+                            controls.Add(new AudioSession(session, devName));
+                        }
                     }
                 }
             }

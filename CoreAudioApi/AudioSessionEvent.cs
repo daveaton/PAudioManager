@@ -20,7 +20,14 @@ namespace CoreAudioApi
 
         public void RaiseEvent(object sender, VolumeDataEventArgs data)
         {
-            VolumeChanged(sender, data);
+            if (sender != null && data !=null)
+            {
+                VolumeChangedEventHandler onVolumeChanged = this.VolumeChanged;
+                if (onVolumeChanged != null)
+                {
+                    onVolumeChanged(sender, data);
+                }
+            }
         }
 
         public int OnDisplayNameChanged(string NewDisplayName, Guid EventContext)

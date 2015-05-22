@@ -90,17 +90,19 @@ namespace AudioManager
             processNames = processName;
             volumeControls = new List<IVolumeControl>();
             OS = SysInfo.Os;
-            ServiceController process = new ServiceController("AudioSrv");
-            if (process.Status != ServiceControllerStatus.Running)
+            using (ServiceController process = new ServiceController("AudioSrv"))
             {
-                try
+                if (process.Status != ServiceControllerStatus.Running)
                 {
-                    process.Start();
-                    process.WaitForStatus(ServiceControllerStatus.Running, new TimeSpan(0, 0, 5));
-                }
-                catch
-                {
-                    throw;
+                    try
+                    {
+                        process.Start();
+                        process.WaitForStatus(ServiceControllerStatus.Running, new TimeSpan(0, 0, 5));
+                    }
+                    catch
+                    {
+                        throw;
+                    }
                 }
             }
             switch (OS)

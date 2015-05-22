@@ -37,9 +37,10 @@ namespace AudioManager.Drivers.XP
             try
             {
                 MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-                MMDevice device = DevEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eConsole);
-                //MMDevice device2 = DevEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
-                result = (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+                using (MMDevice device = DevEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eConsole))
+                {
+                    result = (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+                }
                 //result2 = (int)(device2.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
             }
             catch (Exception)

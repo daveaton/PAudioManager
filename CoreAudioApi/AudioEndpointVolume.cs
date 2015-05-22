@@ -170,6 +170,7 @@ namespace CoreAudioApi
                 if (_CallBack != null)
                 {
                     Marshal.ThrowExceptionForHR(_AudioEndPointVolume.UnregisterControlChangeNotify(_CallBack));
+                    _CallBack.Dispose();
                     _CallBack = null;
                 }
             }
