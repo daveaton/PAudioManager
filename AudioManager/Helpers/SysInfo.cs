@@ -1,8 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-
-namespace AudioManager.Helpers
+﻿namespace AudioManager.Helpers
 {
     public static class SysInfo
     {
@@ -10,7 +6,7 @@ namespace AudioManager.Helpers
         {
             get
             {
-                Version info = Environment.OSVersion.Version;
+                System.Version info = System.Environment.OSVersion.Version;
                 OsVersion version = default(OsVersion);
                 if (info.Major == 6)
                 {
@@ -37,7 +33,7 @@ namespace AudioManager.Helpers
         {
             get
             {
-                return IntPtr.Size == 8;
+                return System.IntPtr.Size == 8;
             }
         }
 
@@ -45,13 +41,13 @@ namespace AudioManager.Helpers
         {
             get
             {
-                if ((Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor >= 1) ||
-        Environment.OSVersion.Version.Major >= 6)
+                if ((System.Environment.OSVersion.Version.Major == 5 && System.Environment.OSVersion.Version.Minor >= 1) ||
+        System.Environment.OSVersion.Version.Major >= 6)
                 {
-                    using (Process p = Process.GetCurrentProcess())
+                    using (System.Diagnostics.Process p = System.Diagnostics.Process.GetCurrentProcess())
                     {
                         bool retVal;
-                        if (!IsWow64Process(p.Handle, out retVal))
+                        if (!NativeMethods.IsWow64Process(p.Handle, out retVal))
                         {
                             return false;
                         }
@@ -69,7 +65,7 @@ namespace AudioManager.Helpers
         {
             get
             {
-                return Environment.OSVersion.VersionString;
+                return System.Environment.OSVersion.VersionString;
             }
         }
 
@@ -77,19 +73,8 @@ namespace AudioManager.Helpers
         {
             get
             {
-                return Environment.OSVersion.ServicePack;
+                return System.Environment.OSVersion.ServicePack;
             }
         }
-
-        #region Private Methods
-
-        [DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool IsWow64Process(
-            [In] IntPtr hProcess,
-            [Out] out bool wow64Process
-        );
-
-        #endregion Private Methods
     }
 }

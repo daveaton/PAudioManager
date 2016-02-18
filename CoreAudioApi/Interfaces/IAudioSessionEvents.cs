@@ -29,25 +29,25 @@ namespace CoreAudioApi.Interfaces
     InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IAudioSessionEvents
     {
-        [PreserveSig]
-        int OnDisplayNameChanged([MarshalAs(UnmanagedType.LPWStr)] string newDisplayName, Guid eventContext);
+        //[PreserveSig]
+        //int OnDisplayNameChanged([MarshalAs(UnmanagedType.LPWStr)] string newDisplayName, Guid eventContext);
 
-        [PreserveSig]
-        int OnIconPathChanged([MarshalAs(UnmanagedType.LPWStr)] string newIconPath, Guid eventContext);
+        //[PreserveSig]
+        //int OnIconPathChanged([MarshalAs(UnmanagedType.LPWStr)] string newIconPath, Guid eventContext);
 
         [PreserveSig]
         int OnSimpleVolumeChanged(float newVolume, bool newMute, Guid eventContext);
 
-        [PreserveSig]
-        int OnChannelVolumeChanged(UInt32 channelCount, IntPtr newChannelVolumeArray, UInt32 changedChannel, Guid eventContext);
+        //[PreserveSig]
+        //int OnChannelVolumeChanged(UInt32 channelCount, IntPtr newChannelVolumeArray, UInt32 changedChannel, Guid eventContext);
 
-        [PreserveSig]
-        int OnGroupingParamChanged(Guid newGroupingParam, Guid EventContext);
+        //[PreserveSig]
+        //int OnGroupingParamChanged(Guid newGroupingParam, Guid EventContext);
 
-        [PreserveSig]
-        int OnStateChanged(AudioSessionState newState);
+        //[PreserveSig]
+        //int OnStateChanged(AudioSessionState newState);
 
-        [PreserveSig]
-        int OnSessionDisconnected(AudioSessionDisconnectReason disconnectReason);
+        //[PreserveSig]
+        //int OnSessionDisconnected(AudioSessionDisconnectReason disconnectReason);
     }
 }

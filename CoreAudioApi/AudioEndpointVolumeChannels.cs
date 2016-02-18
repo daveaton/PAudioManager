@@ -27,8 +27,8 @@ namespace CoreAudioApi
 {
     public class AudioEndpointVolumeChannels
     {
-        private IAudioEndpointVolume _AudioEndPointVolume;
-        private AudioEndpointVolumeChannel[] _Channels;
+        private readonly IAudioEndpointVolume _AudioEndPointVolume;
+        private readonly AudioEndpointVolumeChannel[] _Channels;
 
         public int Count
         {
@@ -50,12 +50,11 @@ namespace CoreAudioApi
 
         internal AudioEndpointVolumeChannels(IAudioEndpointVolume parent)
         {
-            int ChannelCount;
             _AudioEndPointVolume = parent;
 
-            ChannelCount = Count;
-            _Channels = new AudioEndpointVolumeChannel[ChannelCount];
-            for (int i = 0; i < ChannelCount; i++)
+            int channelCount = Count;
+            _Channels = new AudioEndpointVolumeChannel[channelCount];
+            for (int i = 0; i < channelCount; i++)
             {
                 _Channels[i] = new AudioEndpointVolumeChannel(_AudioEndPointVolume, i);
             }

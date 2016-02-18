@@ -13,21 +13,14 @@ namespace AudioManager.Drivers.XP
             if (value > 100)
                 value = 100;
 
-            try
-            {
-                // Calculate the volume that's being set
-                double newVolume = ushort.MaxValue * value / 10.0;
+            // Calculate the volume that's being set
+            double newVolume = ushort.MaxValue * value / 10.0;
 
-                uint v = ((uint)newVolume) & 0xffff;
-                uint vAll = v | (v << 16);
+            uint v = ((uint)newVolume) & 0xffff;
+            uint vAll = v | (v << 16);
 
-                // Set the volume
-                NativeMethods.WaveOutSetVolume(IntPtr.Zero, vAll);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            // Set the volume
+            NativeMethods.WaveOutSetVolume(IntPtr.Zero, vAll);
         }
 
         public static int GetVolume()

@@ -32,7 +32,7 @@ namespace CoreAudioApi
     /// </summary>
     public class PropertyStore
     {
-        private IPropertyStore _Store;
+        private readonly IPropertyStore _Store;
 
         public int Count
         {
@@ -70,12 +70,12 @@ namespace CoreAudioApi
         {
             get
             {
-                PropVariant result;
                 for (int i = 0; i < Count; i++)
                 {
                     PropertyKey key = Get(i);
                     if (key.fmtid == guid)
                     {
+                        PropVariant result;
                         Marshal.ThrowExceptionForHR(_Store.GetValue(ref key, out result));
                         return new PropertyStoreProperty(key, result);
                     }

@@ -27,7 +27,7 @@ namespace CoreAudioApi
 {
     public class MMDeviceCollection
     {
-        private IMMDeviceCollection _MMDeviceCollection;
+        private readonly IMMDeviceCollection _MMDeviceCollection;
 
         public int Count
         {

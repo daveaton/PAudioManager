@@ -32,7 +32,8 @@ namespace CoreAudioApi
     // to show up in the public API.
     internal class AudioEndpointVolumeCallback : IAudioEndpointVolumeCallback, IDisposable
     {
-        private AudioEndpointVolume _Parent;
+        private readonly AudioEndpointVolume _Parent;
+        private readonly object syncLock = new object();
 
         internal AudioEndpointVolumeCallback(AudioEndpointVolume parent)
         {
@@ -66,11 +67,10 @@ namespace CoreAudioApi
             //Create combined structure and Fire Event in parent class.
             AudioVolumeNotificationData NotificationData = new AudioVolumeNotificationData(data.guidEventContext, data.bMuted, data.fMasterVolume, voldata);
 
-            lock (this)
+            lock (syncLock)
             {
                 if (_Parent != null)
                 {
-
                     _Parent.FireNotification(NotificationData);
                 }
             }
@@ -80,16 +80,23 @@ namespace CoreAudioApi
 
         #region IDisposable Implementation
 
-        protected bool disposed;
+        public void Dispose()
+        {
+            Dispose(true);
+            // Unregister object for finalization.
+            GC.SuppressFinalize(this);
+        }
+
+        ~AudioEndpointVolumeCallback()
+        {
+            // Finalizer calls Dispose(false)
+            Dispose(false);
+        }
 
         protected virtual void Dispose(bool disposing)
         {
-            lock (this)
+            lock (syncLock)
             {
-                // Do nothing if the object has already been disposed of.
-                if (disposed)
-                    return;
-
                 if (disposing)
                 {
                     // Release disposable objects used by this instance here.
@@ -99,19 +106,9 @@ namespace CoreAudioApi
                 }
 
                 // Release unmanaged resources here. Don't access reference type fields.
-
-                // Remember that the object has been disposed of.
-                disposed = true;
             }
         }
 
-        public virtual void Dispose()
-        {
-            Dispose(true);
-            // Unregister object for finalization.
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
+        #endregion IDisposable Implementation
     }
 }

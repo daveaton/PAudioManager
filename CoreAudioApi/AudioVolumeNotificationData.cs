@@ -26,17 +26,17 @@ namespace CoreAudioApi
 {
     public class AudioVolumeNotificationData
     {
-        private Guid _EventContext;
-        private bool _Muted;
-        private float _MasterVolume;
-        private int _Channels;
-        private float[] _ChannelVolume;
+        private readonly Guid eventContext;
+        private readonly bool muted;
+        private readonly float masterVolume;
+        private readonly int channels;
+        private readonly float[] channelVolume;
 
         public Guid EventContext
         {
             get
             {
-                return _EventContext;
+                return eventContext;
             }
         }
 
@@ -44,7 +44,7 @@ namespace CoreAudioApi
         {
             get
             {
-                return _Muted;
+                return muted;
             }
         }
 
@@ -52,7 +52,7 @@ namespace CoreAudioApi
         {
             get
             {
-                return _MasterVolume;
+                return masterVolume;
             }
         }
 
@@ -60,22 +60,22 @@ namespace CoreAudioApi
         {
             get
             {
-                return _Channels;
+                return channels;
             }
         }
 
         public float[] GetChannelVolume()
         {
-            return _ChannelVolume;
+            return channelVolume;
         }
 
         public AudioVolumeNotificationData(Guid eventContext, bool muted, float masterVolume, float[] channelVolume)
         {
-            _EventContext = eventContext;
-            _Muted = muted;
-            _MasterVolume = masterVolume;
-            _Channels = channelVolume.Length;
-            _ChannelVolume = channelVolume;
+            this.eventContext = eventContext;
+            this.muted = muted;
+            this.masterVolume = masterVolume;
+            channels = channelVolume.Length;
+            this.channelVolume = channelVolume;
         }
     }
 }

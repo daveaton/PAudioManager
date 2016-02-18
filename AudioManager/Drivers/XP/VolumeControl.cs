@@ -14,7 +14,7 @@ namespace AudioManager.Drivers.XP
         #region Private Fileds
 
         private int oldVolume = 0;
-        private int baseVolume;
+        private readonly int baseVolume;
 
         #endregion Private Fileds
 

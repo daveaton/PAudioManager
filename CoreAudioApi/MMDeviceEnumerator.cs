@@ -34,7 +34,7 @@ namespace CoreAudioApi
     }
 
     //Small wrapper class
-    public class MMDeviceEnumerator
+    public sealed class MMDeviceEnumerator
     {
         private IMMDeviceEnumerator _realEnumerator = new _MMDeviceEnumerator() as IMMDeviceEnumerator;
 

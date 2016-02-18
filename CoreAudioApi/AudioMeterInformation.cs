@@ -27,9 +27,9 @@ namespace CoreAudioApi
 {
     public class AudioMeterInformation
     {
-        private IAudioMeterInformation _AudioMeterInformation;
-        private EEndpointHardwareSupport _HardwareSupport;
-        private AudioMeterInformationChannels _Channels;
+        private readonly IAudioMeterInformation _AudioMeterInformation;
+        private readonly EEndpointHardwareSupport _HardwareSupport;
+        private readonly AudioMeterInformationChannels _Channels;
 
         internal AudioMeterInformation(IAudioMeterInformation realInterface)
         {

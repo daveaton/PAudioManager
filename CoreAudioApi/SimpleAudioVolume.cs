@@ -28,7 +28,7 @@ namespace CoreAudioApi
 {
     public class SimpleAudioVolume
     {
-        private ISimpleAudioVolume _SimpleAudioVolume;
+        private readonly ISimpleAudioVolume _SimpleAudioVolume;
 
         internal SimpleAudioVolume(ISimpleAudioVolume realSimpleVolume)
         {

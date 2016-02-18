@@ -40,7 +40,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>pAudio.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>uM4Dwhh47E7Hcq66XM_strongkey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -77,7 +77,8 @@
     <Compile Include="Drivers\IVolumeControl.cs" />
     <Compile Include="Drivers\Seven\VolumeControl.cs" />
     <Compile Include="Drivers\XP\APIWrapper.cs" />
-    <Compile Include="Drivers\XP\StaticMethods.cs" />
+    <Compile Include="Drivers\XP\NativeMethods.cs" />
+    <Compile Include="Helpers\NativeMethods.cs" />
     <Compile Include="Helpers\SessionHandler.cs" />
     <Compile Include="VolumeManager.cs" />
     <Compile Include="Drivers\Vista\VolumeControl.cs" />
@@ -88,13 +89,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="pAudio.pfx" />
+    <None Include="packages.config" />
+    <None Include="uM4Dwhh47E7Hcq66XM_strongkey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoreAudioApi\CoreAudioApi.csproj">
       <Project>{9f1076aa-63df-4128-9c10-fd65e425c783}</Project>
       <Name>CoreAudioApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.AnalyzerPowerPack.1.1.0\analyzers\dotnet\cs\Microsoft.AnalyzerPowerPack.Common.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.AnalyzerPowerPack.1.1.0\analyzers\dotnet\cs\Microsoft.AnalyzerPowerPack.CSharp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

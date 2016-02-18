@@ -26,7 +26,7 @@ namespace AudioManager.Helpers
         {
             get
             {
-                return new Guid(((GuidAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(GuidAttribute), false)).Value.ToUpper());
+                return new Guid(((GuidAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(GuidAttribute), false)).Value.ToUpper(System.Globalization.CultureInfo.InvariantCulture));
             }
         }
     }

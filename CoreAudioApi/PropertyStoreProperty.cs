@@ -24,13 +24,13 @@ namespace CoreAudioApi
 {
     public class PropertyStoreProperty
     {
-        private PropertyKey _PropertyKey;
-        private PropVariant _PropValue;
+        private readonly PropertyKey _PropertyKey;
+        private PropVariant propValue;
 
         internal PropertyStoreProperty(PropertyKey key, PropVariant value)
         {
             _PropertyKey = key;
-            _PropValue = value;
+            propValue = value;
         }
 
         public PropertyKey Key
@@ -45,7 +45,7 @@ namespace CoreAudioApi
         {
             get
             {
-                return _PropValue.Value;
+                return propValue.Value;
             }
         }
     }

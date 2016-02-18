@@ -27,9 +27,9 @@ namespace CoreAudioApi
 {
     public class AudioEndPointVolumeVolumeRange
     {
-        private float _VolumeMindB;
-        private float _VolumeMaxdB;
-        private float _VolumeIncrementdB;
+        private readonly float _VolumeMindB;
+        private readonly float _VolumeMaxdB;
+        private readonly float _VolumeIncrementdB;
 
         internal AudioEndPointVolumeVolumeRange(IAudioEndpointVolume parent)
         {

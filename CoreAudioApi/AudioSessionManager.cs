@@ -27,14 +27,12 @@ namespace CoreAudioApi
 {
     public class AudioSessionManager
     {
-        private IAudioSessionManager2 _AudioSessionManager;
-        private SessionCollection _Sessions;
+        private readonly SessionCollection _Sessions;
 
         internal AudioSessionManager(IAudioSessionManager2 realAudioSessionManager)
         {
-            _AudioSessionManager = realAudioSessionManager;
             IAudioSessionEnumerator _SessionEnum;
-            Marshal.ThrowExceptionForHR(_AudioSessionManager.GetSessionEnumerator(out _SessionEnum));
+            Marshal.ThrowExceptionForHR(realAudioSessionManager.GetSessionEnumerator(out _SessionEnum));
             _Sessions = new SessionCollection(_SessionEnum);
         }
 

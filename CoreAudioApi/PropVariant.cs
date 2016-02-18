@@ -28,26 +28,26 @@ namespace CoreAudioApi
         [System.Runtime.InteropServices.FieldOffset(0)]
         private readonly short vt;
 
-//        [FieldOffset(2)]
-//        private readonly short wReserved1;
+        //        [FieldOffset(2)]
+        //        private readonly short wReserved1;
 
-//        [FieldOffset(4)]
-//        private readonly short wReserved2;
+        //        [FieldOffset(4)]
+        //        private readonly short wReserved2;
 
-//        [FieldOffset(6)]
-//        private readonly short wReserved3;
+        //        [FieldOffset(6)]
+        //        private readonly short wReserved3;
 
-//        [FieldOffset(8)]
-//        private readonly sbyte cVal;
+        //        [FieldOffset(8)]
+        //        private readonly sbyte cVal;
 
         [System.Runtime.InteropServices.FieldOffset(8)]
         private readonly byte bVal;
 
         [System.Runtime.InteropServices.FieldOffset(8)]
-        private short iVal;
+        private readonly short iVal;
 
-//        [FieldOffset(8)]
- //       private readonly ushort uiVal;
+        //        [FieldOffset(8)]
+        //       private readonly ushort uiVal;
 
         [System.Runtime.InteropServices.FieldOffset(8)]
         private readonly int lVal;
@@ -58,29 +58,29 @@ namespace CoreAudioApi
         [System.Runtime.InteropServices.FieldOffset(8)]
         private readonly long hVal;
 
-//        [FieldOffset(8)]
- //       private readonly ulong uhVal;
+        //        [FieldOffset(8)]
+        //       private readonly ulong uhVal;
 
-//        [FieldOffset(8)]
-//        private readonly float fltVal;
+        //        [FieldOffset(8)]
+        //        private readonly float fltVal;
 
-//        [FieldOffset(8)]
-//        private readonly double dblVal;
+        //        [FieldOffset(8)]
+        //        private readonly double dblVal;
 
         [System.Runtime.InteropServices.FieldOffset(8)]
         private Interfaces.Blob blobVal;
 
-//        [FieldOffset(8)]
-//        private readonly DateTime date;
+        //        [FieldOffset(8)]
+        //        private readonly DateTime date;
 
-//        [FieldOffset(8)]
-//        private readonly bool boolVal;
+        //        [FieldOffset(8)]
+        //        private readonly bool boolVal;
 
-//        [FieldOffset(8)]
-//        private readonly int scode;
+        //        [FieldOffset(8)]
+        //        private readonly int scode;
 
-//        [FieldOffset(8)]
-//        private readonly FILETIME filetime;
+        //        [FieldOffset(8)]
+        //        private readonly FILETIME filetime;
 
         [System.Runtime.InteropServices.FieldOffset(8)]
         private readonly System.IntPtr everything_else;

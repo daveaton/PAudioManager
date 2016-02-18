@@ -4,11 +4,11 @@ using System;
 
 namespace CoreAudioApi
 {
-    public delegate void VolumeChangedEventHandler(object sender, VolumeDataEventArgs data);
+    public delegate void VolumeChangedEventHandler(object sender, VolumeDataEventArgs e);
 
     public class AudioSessionEvent : IAudioSessionEvents
     {
-        public event VolumeChangedEventHandler VolumeChanged, data;
+        public event VolumeChangedEventHandler VolumeChanged;
 
         public bool HasListeners
         {
@@ -20,9 +20,9 @@ namespace CoreAudioApi
 
         public void RaiseEvent(object sender, VolumeDataEventArgs data)
         {
-            if (sender != null && data !=null)
+            if (sender != null && data != null)
             {
-                VolumeChangedEventHandler onVolumeChanged = this.VolumeChanged;
+                VolumeChangedEventHandler onVolumeChanged = VolumeChanged;
                 if (onVolumeChanged != null)
                 {
                     onVolumeChanged(sender, data);
@@ -30,15 +30,15 @@ namespace CoreAudioApi
             }
         }
 
-        public int OnDisplayNameChanged(string NewDisplayName, Guid EventContext)
-        {
-            return 0;
-        }
+        //public int OnDisplayNameChanged(string NewDisplayName, Guid EventContext)
+        //{
+        //    return 0;
+        //}
 
-        public int OnIconPathChanged(string NewIconPath, Guid eventContext)
-        {
-            return 0;
-        }
+        ////public int OnIconPathChanged(string NewIconPath, Guid eventContext)
+        //{
+        //    return 0;
+        //}
 
         public int OnSimpleVolumeChanged(float NewVolume, bool newMute, Guid eventContext)
         {
@@ -50,24 +50,24 @@ namespace CoreAudioApi
             return 0;
         }
 
-        public int OnChannelVolumeChanged(uint ChannelCount, IntPtr NewChannelVolumeArray, uint ChangedChannel, Guid EventContext)
-        {
-            return 0;
-        }
+        //public int OnChannelVolumeChanged(uint ChannelCount, IntPtr NewChannelVolumeArray, uint ChangedChannel, Guid EventContext)
+        //{
+        //    return 0;
+        //}
 
-        public int OnGroupingParamChanged(Guid NewGroupingParam, Guid EventContext)
-        {
-            return 0;
-        }
+        //public int OnGroupingParamChanged(Guid NewGroupingParam, Guid EventContext)
+        //{
+        //    return 0;
+        //}
 
-        public int OnStateChanged(AudioSessionState NewState)
-        {
-            return 0;
-        }
+        //public int OnStateChanged(AudioSessionState NewState)
+        //{
+        //    return 0;
+        //}
 
-        public int OnSessionDisconnected(AudioSessionDisconnectReason DisconnectReason)
-        {
-            return 0;
-        }
+        //public int OnSessionDisconnected(AudioSessionDisconnectReason DisconnectReason)
+        //{
+        //    return 0;
+        //}
     }
 }

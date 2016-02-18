@@ -27,7 +27,7 @@ namespace CoreAudioApi
 {
     public class AudioMeterInformationChannels
     {
-        private IAudioMeterInformation _AudioMeterInformation;
+        private readonly IAudioMeterInformation _AudioMeterInformation;
 
         public int Count
         {

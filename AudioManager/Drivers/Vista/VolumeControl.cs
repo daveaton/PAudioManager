@@ -16,11 +16,9 @@ namespace AudioManager.Drivers.Vista
         public VolumeControl(string processName)
         {
             MMDeviceEnumerator deviceEnumerator = new MMDeviceEnumerator();
-            using (MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia))
-            {
-                this.baseVolume = (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
-                this.baseMute = device.AudioEndpointVolume.Mute;
-            }
+            MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+            baseVolume = (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+            baseMute = device.AudioEndpointVolume.Mute;
         }
 
         #endregion Constructor
@@ -46,10 +44,8 @@ namespace AudioManager.Drivers.Vista
             if (newVolume < 0)
                 newVolume = 0;
             MMDeviceEnumerator deviceEnumerator = new MMDeviceEnumerator();
-            using (MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia))
-            {
-                device.AudioEndpointVolume.MasterVolumeLevelScalar = newVolume;
-            }
+            MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+            device.AudioEndpointVolume.MasterVolumeLevelScalar = newVolume;
         }
 
         #endregion Set Volume
@@ -59,10 +55,8 @@ namespace AudioManager.Drivers.Vista
         void IVolumeControl.SetMute(bool value)
         {
             MMDeviceEnumerator deviceEnumerator = new MMDeviceEnumerator();
-            using (MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia))
-            {
-                device.AudioEndpointVolume.Mute = value;
-            }
+            MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+            device.AudioEndpointVolume.Mute = value;
         }
 
         #endregion Set Mute
@@ -72,10 +66,8 @@ namespace AudioManager.Drivers.Vista
         int IVolumeControl.GetVolume()
         {
             MMDeviceEnumerator deviceEnumerator = new MMDeviceEnumerator();
-            using (MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia))
-            {
-                return (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
-            }
+            MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+            return (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
         }
 
         #endregion Get Volume
@@ -85,10 +77,8 @@ namespace AudioManager.Drivers.Vista
         bool IVolumeControl.GetMute()
         {
             MMDeviceEnumerator deviceEnumerator = new MMDeviceEnumerator();
-            using (MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia))
-            {
-                return device.AudioEndpointVolume.Mute;
-            }
+            MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+            return device.AudioEndpointVolume.Mute;
         }
 
         #endregion Get Mute
@@ -127,12 +117,9 @@ namespace AudioManager.Drivers.Vista
             if (newVolume < 0)
                 newVolume = 0;
             MMDeviceEnumerator deviceEnumerator = new MMDeviceEnumerator();
-            using (MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia))
-            {
-                device.AudioEndpointVolume.MasterVolumeLevelScalar = newVolume;
-                device.AudioEndpointVolume.Mute = this.baseMute;
-            }
-            
+            MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+            device.AudioEndpointVolume.MasterVolumeLevelScalar = newVolume;
+            device.AudioEndpointVolume.Mute = baseMute;
         }
 
         #endregion Dispose

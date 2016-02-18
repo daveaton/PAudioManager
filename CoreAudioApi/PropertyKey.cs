@@ -26,7 +26,7 @@ namespace CoreAudioApi
 {
     public struct PropertyKey
     {
-        public Guid fmtid;
-        public int pid;
+        internal Guid fmtid;
+        internal int pid;
     };
 }

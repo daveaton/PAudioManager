@@ -14,7 +14,7 @@ namespace AudioManager.Helpers
 
         public AudioSessionEvent Handler { get; private set; }
 
-        private List<string> IDs;
+        private readonly List<string> IDs;
 
         public void AddHandler(AudioSessionControl session)
         {

@@ -27,8 +27,8 @@ namespace CoreAudioApi
 {
     public class AudioEndpointVolumeStepInformation
     {
-        private uint _Step;
-        private uint _StepCount;
+        private readonly uint _Step;
+        private readonly uint _StepCount;
 
         internal AudioEndpointVolumeStepInformation(IAudioEndpointVolume parent)
         {

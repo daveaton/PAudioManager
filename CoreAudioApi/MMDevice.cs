@@ -31,7 +31,7 @@ namespace CoreAudioApi
     {
         #region Variables
 
-        private IMMDevice _RealDevice;
+        private readonly IMMDevice _RealDevice;
         private PropertyStore _PropertyStore;
         private AudioMeterInformation _AudioMeterInformation;
         private AudioEndpointVolume _AudioEndpointVolume;
@@ -205,9 +205,9 @@ namespace CoreAudioApi
             if (disposing)
             {
                 // free managed resources here
-                if (this._AudioEndpointVolume != null)
+                if (_AudioEndpointVolume != null)
                 {
-                    this._AudioEndpointVolume.Dispose();
+                    _AudioEndpointVolume.Dispose();
                 }
             }
             // free native resources here if there are any.

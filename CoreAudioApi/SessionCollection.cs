@@ -27,7 +27,7 @@ namespace CoreAudioApi
 {
     public class SessionCollection
     {
-        private IAudioSessionEnumerator _AudioSessionEnumerator;
+        private readonly IAudioSessionEnumerator _AudioSessionEnumerator;
 
         internal SessionCollection(IAudioSessionEnumerator realEnumerator)
         {

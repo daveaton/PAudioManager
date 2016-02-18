@@ -11,11 +11,10 @@ namespace AudioManager
     {
         #region Private Fields
 
-        private OsVersion OS = default(OsVersion);
+        private readonly OsVersion OS;
         private readonly List<IVolumeControl> volumeControls;
-        private readonly string[] processNames;
-       // private int volume;
-       // private bool mute;
+        // private int volume;
+        // private bool mute;
 
         #endregion Private Fields
 
@@ -87,22 +86,15 @@ namespace AudioManager
 
         public VolumeManager(params string[] processName)
         {
-            processNames = processName;
+            string[] processNames = processName;
             volumeControls = new List<IVolumeControl>();
             OS = SysInfo.Os;
             using (ServiceController process = new ServiceController("AudioSrv"))
             {
                 if (process.Status != ServiceControllerStatus.Running)
                 {
-                    try
-                    {
-                        process.Start();
-                        process.WaitForStatus(ServiceControllerStatus.Running, new TimeSpan(0, 0, 5));
-                    }
-                    catch
-                    {
-                        throw;
-                    }
+                    process.Start();
+                    process.WaitForStatus(ServiceControllerStatus.Running, new TimeSpan(0, 0, 5));
                 }
             }
             switch (OS)

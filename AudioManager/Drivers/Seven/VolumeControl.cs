@@ -7,13 +7,13 @@ using System.Diagnostics;
 
 namespace AudioManager.Drivers.Seven
 {
-    public class VolumeControl : IVolumeControl
+    public class VolumeControl : IVolumeControl, IDisposable
     {
         #region Private Fields
 
         private readonly string _processName;
         private bool isListening/* = false*/;
-        private SessionHandler handler;
+        private readonly SessionHandler handler;
         private float _volume;
         private bool _mute;
 
@@ -236,17 +236,29 @@ namespace AudioManager.Drivers.Seven
 
         #region Dispose
 
-        protected virtual void Dispose()
+        public void Dispose()
         {
-            ((IVolumeControl)this).Dispose();
+            //((IVolumeControl)this).Dispose();
+            Dispose(true);
         }
 
-        void IVolumeControl.Dispose()
+        ~VolumeControl()
         {
-            List<AudioSession> sessions = GetSessions();
-            foreach (AudioSession session in sessions)
+            // Finalizer calls Dispose(false)
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                handler.RemoveHandler(session.Session);
+                List<AudioSession> sessions = GetSessions();
+                foreach (AudioSession session in sessions)
+                {
+                    handler.RemoveHandler(session.Session);
+                }
+
+                GC.SuppressFinalize(this);
             }
         }
 
@@ -293,7 +305,7 @@ namespace AudioManager.Drivers.Seven
                             p = Process.GetProcesses()[0];
                         }
 
-                        if (p.ProcessName == this._processName)
+                        if (p.ProcessName == _processName)
                         {
                             controls.Add(new AudioSession(session, devName));
                         }

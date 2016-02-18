@@ -28,12 +28,12 @@ namespace CoreAudioApi
 {
     public class AudioEndpointVolume : IDisposable
     {
-        private IAudioEndpointVolume _AudioEndPointVolume;
-        private AudioEndpointVolumeChannels _Channels;
-        private AudioEndpointVolumeStepInformation _StepInformation;
-        private AudioEndPointVolumeVolumeRange _VolumeRange;
-        private EEndpointHardwareSupport _HardwareSupport;
-        private AudioEndpointVolumeCallback _CallBack;
+        private readonly IAudioEndpointVolume _AudioEndPointVolume;
+        private readonly AudioEndpointVolumeChannels _Channels;
+        private readonly AudioEndpointVolumeStepInformation _StepInformation;
+        private readonly AudioEndPointVolumeVolumeRange _VolumeRange;
+        private readonly EEndpointHardwareSupport _HardwareSupport;
+        private AudioEndpointVolumeCallback callBack;
 
         public event AudioEndpointVolumeNotificationDelegate OnVolumeNotification;
 
@@ -131,8 +131,8 @@ namespace CoreAudioApi
             Marshal.ThrowExceptionForHR(_AudioEndPointVolume.QueryHardwareSupport(out HardwareSupp));
             _HardwareSupport = (EEndpointHardwareSupport)HardwareSupp;
             _VolumeRange = new AudioEndPointVolumeVolumeRange(_AudioEndPointVolume);
-            _CallBack = new AudioEndpointVolumeCallback(this);
-            Marshal.ThrowExceptionForHR(_AudioEndPointVolume.RegisterControlChangeNotify(_CallBack));
+            callBack = new AudioEndpointVolumeCallback(this);
+            Marshal.ThrowExceptionForHR(_AudioEndPointVolume.RegisterControlChangeNotify(callBack));
         }
 
         internal void FireNotification(AudioVolumeNotificationData NotificationData)
@@ -167,11 +167,11 @@ namespace CoreAudioApi
             if (disposing)
             {
                 // free managed resources here
-                if (_CallBack != null)
+                if (callBack != null)
                 {
-                    Marshal.ThrowExceptionForHR(_AudioEndPointVolume.UnregisterControlChangeNotify(_CallBack));
-                    _CallBack.Dispose();
-                    _CallBack = null;
+                    Marshal.ThrowExceptionForHR(_AudioEndPointVolume.UnregisterControlChangeNotify(callBack));
+                    callBack.Dispose();
+                    callBack = null;
                 }
             }
             // free native resources here if there are any.
